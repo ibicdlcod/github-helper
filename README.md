@@ -26,7 +26,7 @@ git config --global http.proxy socks5://127.0.0.1:8080
 git clone https://github.com/<你的用户名>/<你的项目名>
 ```
 
-请使用SOCKS5，HTTP代理如果是使用自签CA证书可能会在这一步出错.
+如果使用XX-net请使用SOCKS5 smart-router，HTTP代理如果是使用自签CA证书可能会在这一步出错.
 
 ### 如果一定要使用SSH clone:
 
@@ -55,3 +55,9 @@ Host github.com
   ProxyCommand nc -x <填SOCKS代理地址>:<填SOCKS5代理port> %h %p
 ```
 如果使用HTTP PROXY, 则在``-x``之前添加``-X connect``
+
+#### 最后clone:
+
+```
+git clone git@github.com:<你的用户名>/<你的项目名>
+```
