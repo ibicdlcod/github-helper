@@ -44,4 +44,12 @@ Host github.com
 
 #### Linux:
 
-待定
+##### 使用上述阿里云：
+在``.ssh/config``中添加
+```
+Host github.com       
+  User git
+  ProxyCommand nc -x localhost:8080 %h %p
+```
+##### 使用XX-net:
+XX-net尚不支持port 22，请raise issue
