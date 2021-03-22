@@ -32,7 +32,7 @@ git clone https://github.com/<你的用户名>/<你的项目名>
 
 #### Windows: 暂无好的方案
 
-理论上应该：安装[ncat](https://nmap.org/download.html#windows 选第一个加粗的.exe)，然后在ssh设置（一般位于~/.ssh/config，其中~是你的msysgit，cygwin，或其他什么你的git的模拟UNIX环境的主目录下）中添加
+理论上应该：安装[ncat](https://nmap.org/download.html#windows)(选第一个加粗的.exe)，然后在ssh设置（一般位于~/.ssh/config，其中~是你的msysgit，cygwin，或其他什么你的git的模拟UNIX环境的主目录下）中添加
 
 ```
 Host github.com
