@@ -8,7 +8,7 @@
 ssh -D 8080 root@<你的服务器IP>
 ```
 
-就得到一个地址位于127.0.0.1的socks5代理，其中8080应换成你想用的port，不应与其他在用的port冲突.
+就得到一个地址位于``127.0.0.1``的socks5代理，其中``8080``应换成你想用的port，不应与其他在用的port冲突.
 
 优点是快，缺点是要钱，你也可以使用其他代理例如[XX-net](https://github.com/XX-net/XX-net)
 
@@ -30,26 +30,28 @@ git clone https://github.com/<你的用户名>/<你的项目名>
 
 ### 如果一定要使用SSH clone:
 
-#### Windows: 暂无好的方案
+请先阅读[添加SSH KEY](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+**XX-net尚不支持port 22，请raise issue**
 
-理论上应该：安装[ncat](https://nmap.org/download.html#windows)(选第一个加粗的.exe)，然后在ssh设置（一般位于~/.ssh/config，其中~是你的msysgit，cygwin，或其他什么你的git的模拟UNIX环境的主目录下）中添加
+#### Windows:
 
+感谢(https://stackoverflow.com/questions/16672351/ssh-to-a-remote-host-that-is-not-reachable-directly)
+
+使用Cygwin，安装socat,git,openssh包 然后在ssh设置（一般位于~/.ssh/config）中添加：
 ```
 Host github.com
-  User git
-  ProxyCommand ncat --proxy <你的代理地址>:<你的代理port> --proxy-type <这里填http或socks4或socks5> %h %p
+User git
+  ProxyCommand socat - SOCKS4:127.0.0.1:%h:%p,socksport=8080
+  IdentityFile <这里填你的ssh key路径, 注意比如E盘在Cygwin下是/cygdrive/e/>
 ```
-
-但是目前这种方法会出错，见(https://superuser.com/questions/1615110/git-pushing-through-socks5-proxy-with-proxycommandncat-fails?newreg=dba074bddecb45f58879473bd65b3f44)
+如果使用HTTP Proxy，则将``SOCKS4``换成``PROXY``，``socksport``换成``proxyport``
 
 #### Linux:
 
-##### 使用上述阿里云：
-在``.ssh/config``中添加
+在``~/.ssh/config``中添加
 ```
 Host github.com       
   User git
-  ProxyCommand nc -x localhost:8080 %h %p
+  ProxyCommand nc -x <填SOCKS代理地址>:<填SOCKS5代理port> %h %p
 ```
-##### 使用XX-net:
-XX-net尚不支持port 22，请raise issue
+如果使用HTTP PROXY, 则在``-x``之前添加``-X connect``
