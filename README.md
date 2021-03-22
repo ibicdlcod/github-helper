@@ -14,7 +14,7 @@ ssh -D 8080 root@<你的服务器IP>
 
 ## 使用代理服务器进行git操作
 
-### 使用HTTPS clone:
+### 使用HTTPS clone (推荐):
 
 ```
 git config --global http.proxy socks5://127.0.0.1:8080
